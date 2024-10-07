@@ -23,17 +23,13 @@ DELETE_ORIGINAL_MESSAGE = True  # Set to False if you don't want the bot to dele
 @bot.event
 async def on_ready():
     logging.info(f'{bot.user.name} is now online and ready to send replies on behalf of the team.')
-    print(f'{bot.user.name} is now online and ready to send replies on behalf of the team.')
 
-# Command to let anyone send a message in any channel through the bot
 @bot.command()
 async def reply(ctx, *, message: str):
     try:
-        # Optionally delete the user's original message
         if DELETE_ORIGINAL_MESSAGE:
             await ctx.message.delete()
 
-        # Send the formatted message on behalf of the "Support Team"
         await ctx.send(f"**Support Team:** {message}")
     
     except discord.Forbidden:
@@ -48,7 +44,6 @@ async def reply(ctx, *, message: str):
         await ctx.send(f"An unexpected error occurred: {e}")
         logging.exception(f"Unexpected error in channel {ctx.channel.name}: {str(e)}")
 
-# Enhanced error handler to catch command-specific errors
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
