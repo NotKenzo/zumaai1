@@ -30,7 +30,7 @@ async def reply(ctx, *, message: str):
         if DELETE_ORIGINAL_MESSAGE:
             await ctx.message.delete()
 
-        await ctx.send(f"**Support Team:** {message}")
+        await ctx.send(f"{message}")
     
     except discord.Forbidden:
         await ctx.send("I don't have permission to delete messages or send messages here.")
